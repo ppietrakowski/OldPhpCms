@@ -26,10 +26,10 @@
                         echo "
                             <tr>
                                 <td>$number</td>
-                                <td>$obj->imie</td>
-                                <td>$obj->nazwisko</td>
-                                <td><a href='cms.php?edit=".$obj->id."'>Edytuj</a></td>
-                                <td><a href='cms.php?delete=".$obj->id."'>Usuń</a></td>
+                                <td>$obj->Name</td>
+                                <td>$obj->Surname</td>
+                                <td><a href='cms.php?edit=".$obj->Id."'>Edytuj</a></td>
+                                <td><a href='cms.php?delete=".$obj->Id."'>Usuń</a></td>
                             </tr>
                         ";
                         $number++;
@@ -53,12 +53,12 @@
                     // w przeciwnym(domyslnym) wypadku napisze
                     // formularz do dodawania
                     if(isset($_GET['edit'])) {
-                        $q = "SELECT * FROM osoby WHERE id=".$_GET['edit'];
+                        $q = "SELECT * FROM osoby WHERE Id=".$_GET['edit'];
                         $r = $this->connection_->query($q);
                         $obj = mysqli_fetch_object($r);
                         echo "<form action='cms.php' method='get'>
-                                <input name='name' value='".$obj->imie."'>
-                                <input name='surname' value='".$obj->nazwisko."'>
+                                <input name='name' value='".$obj->Name."'>
+                                <input name='surname' value='".$obj->Surname."'>
                                 <input name='edit' type='hidden' value=".$_GET['edit'].">
                                 <input type='submit' value='Edytuj'>
                             </form>
@@ -81,11 +81,11 @@
                         if($_GET['name'] != '' && $_GET['surname'] != '') {
                             // wybranie w celu nie wpisania tego
                             // samego rekordu
-                            $q = "SELECT * FROM osoby WHERE imie='".$_GET['name']."' AND nazwisko='".$_GET['surname']."'";
+                            $q = "SELECT * FROM osoby WHERE Name='".$_GET['name']."' AND Surname='".$_GET['surname']."'";
                             $r = $this->connection_->query($q);
                             // nie ma zastrzezenia do przypisania
                             if(($obj = mysqli_fetch_object($r)) == null) {
-                                $q = "INSERT INTO osoby(imie, nazwisko) VALUES('".$_GET['name']."', '".$_GET['surname']."')";
+                                $q = "INSERT INTO osoby(Name, Surname) VALUES('".$_GET['name']."', '".$_GET['surname']."')";
                                 $r = $this->connection_->query($q);
                                 
                                 // wyswietlanie komunikatow
@@ -103,7 +103,7 @@
                 private function editRecord() {
                     if(isset($_GET['edit'])) {
                         if(isset($_GET['name']) && isset($_GET['surname'])) {
-                            $q = "UPDATE osoby SET imie='".$_GET['name']."', nazwisko='".$_GET['surname']."' WHERE id=".$_GET['edit'];
+                            $q = "UPDATE osoby SET Name='".$_GET['name']."', Surname='".$_GET['surname']."' WHERE Id=".$_GET['edit'];
                             $r = $this->connection_->query($q);
                             echo "<span class='ok'>Zmieniono rekord !</span>";
                         }
@@ -111,7 +111,7 @@
                 }
                 private function deleteRecord() {
                     if(isset($_GET['delete'])) {      
-                            $q = "DELETE FROM osoby WHERE id=".$_GET['delete'];
+                            $q = "DELETE FROM osoby WHERE Id=".$_GET['delete'];
                             $r = $this->connection_->query($q);
                             echo "<span class='ok'>Usunięto rekord!</span>";
                     }
