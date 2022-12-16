@@ -152,6 +152,7 @@
         }
 
         private $Connection;
+        private $recordsCount;
     }
     ?>
     <?php
