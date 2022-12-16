@@ -1,0 +1,29 @@
+.header {
+    font-size: 48px;
+    text-decoration: none;
+    color: black;
+}
+
+.header:hover {
+    font-size: 48px;
+    text-decoration: none;
+    color: black;
+    background-color: cadetblue;
+}
+
+a:hover {
+    background-color: beige;
+    color: black;
+    text-decoration: none;
+}
+tr, td, table {
+    font-size: 18px;
+    border: 1px black solid;
+    border-collapse: collapse;
+}
+.error {
+    background-color: rgb(250, 160, 160);
+}
+.ok {
+    background-color: rgb(100, 255, 100);
+}
